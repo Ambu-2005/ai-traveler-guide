@@ -1,148 +1,197 @@
-# AI Traveler Guider
+# 🌍 AI Traveler Guide
 
-An AI-powered travel guide application that generates rich destination descriptions and realistic streaming audio guides using the **Google Gemini (GenAI)** and **Murf AI** APIs.
+An AI-powered travel companion that generates historical information about tourist destinations and converts it into audio guides, making travel more informative and engaging.
 
----
+## ✨ Features
 
-## Features
+- 📖 **AI-Generated Travel Information:** Generate informative descriptions of tourist destinations using Google Gemini.
+- 🔊 **AI-Powered Audio Guides:** Convert generated travel descriptions into speech using the Murf AI API.
+- 🌐 **Web Interface:** Interact with the application through a simple frontend built with HTML, CSS, and JavaScript.
+- 🔗 **Full-Stack Integration:** Connect a JavaScript frontend to a Python Flask backend.
+- ☁️ **Cloud Deployment:** Deploy the frontend and backend using Render.
 
-- **AI Destination Guides**: Generates concise summaries or detailed storytelling descriptions of world-famous travel spots using Google Gemini.
-- **Realistic Voice Narration**: Streams lifelike audio narration powered by Murf AI's FALCON model.
-- **Multilingual Support**: Supports English, Hindi, Tamil, and Telugu with tailored male and female voices.
-- **Interactive Web Interface**: Responsive destination cards, voice/style selectors, and integrated audio player with expandable text transcripts.
+> Features such as multilingual support, voice customization, destination search, and itinerary planning should be listed as available only after they have been implemented and tested.
 
----
+## 🚀 Live Demo
 
-## Project Structure
+**Frontend:** https://ai-traveler-guide.onrender.com
+
+**Backend:** Add your deployed backend URL here.
+
+## 🛠️ Technology Stack
+
+- **Frontend:** HTML, CSS, JavaScript
+- **Backend:** Python, Flask
+- **AI Text Generation:** Google Gemini API
+- **Text-to-Speech:** Murf AI API
+- **Deployment:** Render
+- **Version Control:** Git and GitHub
+
+## 📁 Project Structure
 
 ```text
 AI_traveler_guider/
 ├── Backend/
-│   ├── app.py              # Flask server handling AI generation and TTS streaming
-│   ├── requirements.txt    # Python dependencies
-│   ├── .env.example        # Environment variable template
-│   └── .env                # Local secrets (ignored by Git)
+│   ├── app.py
+│   ├── requirements.txt
+│   ├── .env.example
+│   └── .env
 ├── Frontend/
-│   ├── index.html          # UI markup and Tailwind styling
-│   └── index.js            # Client logic and API integration
-├── .gitignore              # Git ignore rules
-└── README.md               # Project documentation
+│   ├── index.html
+│   └── index.js
+├── .gitignore
+└── README.md
 ```
 
----
+**Note:** The `.env` file contains private API keys and must never be uploaded to GitHub. The `venv/` directory is a local Python virtual environment and should not be committed.
 
-## Prerequisites
+## ⚙️ Prerequisites
 
-- **Python 3.10+** (tested on Python 3.14)
-- **Google GenAI API Key** ([Google AI Studio](https://aistudio.google.com/))
-- **Murf AI API Key** ([Murf.ai](https://murf.ai/api))
+Before running the project locally, install:
 
----
+- Python 3.10 or a compatible version required by your dependencies
+- pip
+- A modern web browser
+- A Google Gemini API key
+- A Murf AI API key
 
-## Quick Start Guide
+## 💻 Installation and Setup
 
-### 1. Backend Setup
+### 1. Clone the repository
 
-Open a terminal (PowerShell on Windows) in the `Backend` directory:
+```bash
+git clone https://github.com/Ambu-2005/ai-traveler-guide.git
+cd ai-traveler-guide
+```
 
-```powershell
+### 2. Set up the backend
+
+Open a terminal in the project root:
+
+```bash
 cd Backend
+python -m venv venv
 ```
 
-#### Create Virtual Environment & Install Dependencies
+Activate the virtual environment.
+
+**Windows PowerShell:**
 
 ```powershell
-# Create virtual environment
-python -m venv venv
-
-# Activate virtual environment (Windows PowerShell)
 .\venv\Scripts\Activate.ps1
+```
 
-# Install requirements
+**Windows Command Prompt:**
+
+```bat
+venv\Scripts\activate
+```
+
+Install the dependencies:
+
+```bash
 pip install -r requirements.txt
 ```
 
-#### Configure Environment Variables
+### 3. Configure environment variables
 
-Create your local `.env` file from the example:
-
-```powershell
-Copy-Item .env.example .env
-```
-
-Open `Backend/.env` and insert your API keys:
+Create a `.env` file inside the `Backend/` directory. Add your own API keys:
 
 ```env
-MURF_API_KEY=your_murf_api_key_here
-GOOGLE_API_KEY=your_google_api_key_here
+GOOGLE_API_KEY=your_google_gemini_api_key
+MURF_API_KEY=your_murf_api_key
 ```
 
-> **Note:** `.env` is included in `.gitignore` and should never be committed to source control.
+Replace the placeholder values with your actual API keys.
 
-#### Start the Backend Server
+**Security:** Never share your API keys or commit the `.env` file to GitHub. If a key has been exposed publicly, revoke or rotate it before using the application.
 
-```powershell
+### 4. Start the backend
+
+From the `Backend/` directory, run:
+
+```bash
 python app.py
 ```
 
-The Flask backend runs by default on **`http://127.0.0.1:5000`**.
+If your Flask application uses a different startup configuration, follow the instructions in `Backend/app.py`.
 
----
+### 5. Configure and open the frontend
 
-### 2. Frontend Setup
+Open `Frontend/index.js` and ensure the API URL points to the backend you are running or your deployed backend URL.
 
-In a separate terminal window from the workspace root:
+For local development, if Flask runs on port 5000, the URL may be:
 
-#### Option A: Run a Local Web Server (Recommended)
-
-```powershell
-python -m http.server 8000 --directory Frontend
+```javascript
+const API_URL = "http://127.0.0.1:5000";
 ```
 
-Open your browser and navigate to:
-**[http://localhost:8000/index.html](http://localhost:8000/index.html)**
+Use the actual route and request format defined by your frontend and backend code.
 
-#### Option B: Direct Browser Open
+Open `Frontend/index.html` in your browser, or serve the frontend using a local development server.
 
-You can also directly open `Frontend/index.html` in any modern web browser:
+## ☁️ Deployment
 
-```powershell
-Start-Process Frontend\index.html
+The application can be deployed using Render.
+
+### Frontend
+
+- Create a **Static Site** on Render.
+- Connect the GitHub repository.
+- Set the publish directory to `Frontend` if deploying from the repository root.
+- Deploy the site and test its interface.
+
+### Backend
+
+- Create a **Web Service** on Render.
+- Connect the same GitHub repository.
+- Set the root directory to `Backend`.
+- Install dependencies with:
+
+```bash
+pip install -r requirements.txt
 ```
 
----
+- Use the following start command if the Flask application object is named `app` in `app.py`:
 
-## API Endpoints
+```bash
+gunicorn app:app
+```
 
-### `GET /`
-Health check endpoint.
-- **Response**: `{"status": "ok", "message": "AI Traveler Guider Backend is running"}`
+- Add `GOOGLE_API_KEY` and `MURF_API_KEY` in the Render service's environment-variable settings.
+- Update the frontend API URL to use the deployed backend URL.
+- Ensure the backend CORS configuration allows requests from the deployed frontend.
 
-### `POST /generate-audio-guide`
-Generates the text description and audio narration for a chosen destination.
+## 🔒 Security
 
-- **Request Body (JSON)**:
-  ```json
-  {
-    "place": "Taj Mahal",
-    "answerType": "Summary",
-    "language": "English",
-    "voiceId": "Matthew",
-    "locale": "en-US"
-  }
-  ```
-- **Response Body (JSON)**:
-  ```json
-  {
-    "description": "The Taj Mahal is an ivory-white marble mausoleum...",
-    "audioBase64": "<base64_encoded_mp3_data>"
-  }
-  ```
+- Keep all API keys in environment variables.
+- Never commit `.env`, virtual environments, or private credentials.
+- Use `.env.example` to document required variable names without including real values.
+- Rotate any credentials that may have been exposed.
 
----
+## 🧪 Testing Checklist
 
-## Technologies Used
+Before submitting the project, verify:
 
-- **Backend**: Python, Flask, Flask-CORS, `google-genai`, `requests`, `python-dotenv`
-- **Frontend**: HTML5, Vanilla JavaScript, Tailwind CSS
-- **AI Models**: Google Gemini (`gemini-3.1-flash-lite`), Murf AI Speech API (`FALCON`)
+- [ ] The live frontend opens successfully.
+- [ ] A user can enter a destination or travel-related prompt supported by the app.
+- [ ] The backend returns generated travel information.
+- [ ] Audio generation works and the audio can be played.
+- [ ] The frontend communicates with the deployed backend.
+- [ ] API keys are configured securely.
+- [ ] The public GitHub repository contains setup instructions.
+- [ ] The deployed project link is accessible to reviewers.
+
+## 🎯 Project Goal
+
+The goal of AI Traveler Guide is to make travel information more accessible and engaging by combining generative AI with speech synthesis.
+
+## 👨‍💻 Author
+
+**Ambadas**
+
+GitHub: [Ambu-2005](https://github.com/Ambu-2005)
+
+## 📄 License
+
+This project was created for educational and hands-on AI learning purposes. Add a specific open-source license if you intend to distribute the project under one.
