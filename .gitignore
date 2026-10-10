@@ -1,0 +1,22 @@
+# IDE settings
+.vscode/
+
+# Environment variables and API keys
+.env
+**/.env
+
+# Python virtual environments
+.venv/
+venv/
+**/venv/
+**/.venv/
+
+# Python cache files
+__pycache__/
+**/__pycache__/
+*.pyc
+*.pyo
+
+# OS files
+.DS_Store
+Thumbs.db
