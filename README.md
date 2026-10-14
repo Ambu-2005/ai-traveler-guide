@@ -155,7 +155,7 @@ pip install -r requirements.txt
 - Use the following start command if the Flask application object is named `app` in `app.py`:
 
 ```bash
-gunicorn app:app
+gunicorn app:app --timeout 120
 ```
 
 - Add `GOOGLE_API_KEY` and `MURF_API_KEY` in the Render service's environment-variable settings.

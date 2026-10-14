@@ -128,7 +128,7 @@ voiceButtons.forEach(btn => {
 const GENERATE_AUDIO_GUIDE_API_URL =
   (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.protocol === 'file:')
     ? 'http://127.0.0.1:5000/generate-audio-guide'
-    : 'https://ai-traveler-backend.onrender.com/generate-audio-guide';
+    : 'https://ai-traveler-guide-api.onrender.com/generate-audio-guide';
 
 generateButton.addEventListener('click', async () => {
   generateButton.disabled = true;
@@ -151,8 +151,27 @@ generateButton.addEventListener('click', async () => {
     });
 
     if (!response.ok) {
-      const errData = await response.json().catch(() => ({}));
-      throw new Error(errData.error || `Generation failed with status ${response.status}`);
+      let errorMessage = `Server error (${response.status})`;
+      try {
+        const text = await response.text();
+        try {
+          const errData = JSON.parse(text);
+          if (errData && errData.error) {
+            errorMessage = errData.error;
+          }
+        } catch {
+          if (response.status === 500) {
+            errorMessage = "Server error (500). Please check if your Render backend has GOOGLE_API_KEY and MURF_API_KEY environment variables configured, and ensure the latest code is deployed.";
+          } else if (response.status === 502 || response.status === 504) {
+            errorMessage = "Backend service is spinning up on Render. Please wait 30 seconds and try again.";
+          } else if (text && text.length < 200) {
+            errorMessage = text;
+          }
+        }
+      } catch {
+        errorMessage = `Request failed with status ${response.status}`;
+      }
+      throw new Error(errorMessage);
     }
 
     const data = await response.json();
