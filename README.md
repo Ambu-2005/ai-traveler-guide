@@ -16,7 +16,7 @@ An AI-powered travel companion that generates historical information about touri
 
 **Frontend:** https://ai-traveler-guide.onrender.com
 
-**Backend:** https://ai-traveler-guide-api.onrender.com.
+**Backend:** https://ai-traveler-guide-api.onrender.com
 
 ## 🛠️ Technology Stack
 
